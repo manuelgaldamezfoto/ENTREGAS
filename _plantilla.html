@@ -43,7 +43,8 @@ a{color:inherit}
 header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding-block:var(--s4)}
 .brand{font-family:var(--f-display);font-variation-settings:"wdth" 100;font-weight:600;font-size:1rem;letter-spacing:.01em;text-decoration:none}
 .top-right{display:flex;align-items:center;gap:var(--s4);color:var(--muted)}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+@media (max-width:520px){#topLabel{display:none}}
+.lang{flex-shrink:0;display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .lang button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;background:none;border:0;color:var(--muted);padding:.3rem .7rem;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 
@@ -95,7 +96,9 @@ section.block{padding-block:var(--s5)}
 .photos figure{margin:0;display:flex;flex-direction:column;gap:var(--s2);min-width:0}
 .photos .film{aspect-ratio:3/2}
 .photos .film.tall{aspect-ratio:4/5}
+.photos .pic img{object-position:center}
 .photos figcaption{color:var(--muted)}
+.photos.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:900px){.photos{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:560px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dl-row{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s4);padding:var(--s4);background:var(--surface);border-radius:6px}
@@ -268,13 +271,13 @@ const CONFIG = {
 const T = {
   es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
        noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
-       dlText:u=>`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en vuestro equipo.`,
+       dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en vuestro equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en vuestro equipo.`,
        dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te ha gustado",
        asks:[["Una reseña corta","Dos líneas sobre cómo fue trabajar juntos. Me ayuda más que cualquier anuncio."],["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
        copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el vídeo de Drive" },
   en:{ demo:"Delivery template · Hotel Pomelo example", top:"Delivery", shot:"Shoot", loc:"Location", vids:"Videos", pics:"Photos", deliv:"Delivered",
        noteLabel:"Note", vTitle:"Videos", pTitle:"Photos", sel:"selection", ofTotal:n=>`selection of ${n}`, view:"Watch", dl:"Download",
-       dlText:u=>`The full folder is high resolution with no watermark. It will be available until ${u}, so please save it to your own drive.`,
+       dlText:u=>u?`The full folder is high resolution with no watermark. It will be available until ${u}, so please save it to your own drive.`:`The full folder is high resolution with no watermark. Please download it and keep a copy on your side.`,
        dlAll:"Download everything", dlWeb:"Web & social version", uTitle:"Using the material", nTitle:"If you liked it",
        asks:[["A short review","Two lines on what it was like working together. It helps me more than any ad."],["Next season","High season, new rooms or a new menu: I can put together a proposal to refresh your content."],["Know someone?","If another hotel or business nearby needs photo or video, feel free to pass this link along."]],
        copy:"Copy email", copied:"Copied", placeholder:"Your photo here", heroPh:"10–15 s loop", close:"Close", noVideo:"The Drive video will play here" }
@@ -360,7 +363,10 @@ function render(){
   $("clientName").textContent = CONFIG.client;
   $("clientSub").textContent = L(CONFIG.sub);
 
-  const metaRows = [[t.shot, L(CONFIG.shootDate)],[t.loc, CONFIG.location],[t.vids, String(CONFIG.videos.length)],[t.pics, String(CONFIG.photoTotal || CONFIG.photos.length)],[t.deliv, L(CONFIG.deliveredDate)]];
+  const metaRows = [[t.shot, L(CONFIG.shootDate)],[t.loc, CONFIG.location], ...(CONFIG.videos.length ? [[t.vids, String(CONFIG.videos.length)]] : []), [t.pics, String(CONFIG.photoTotal || CONFIG.photos.length)],[t.deliv, L(CONFIG.deliveredDate)]];
+  $("meta").style.gridTemplateColumns = innerWidth > 760 ? `repeat(${metaRows.length},minmax(0,1fr))` : "";
+  $("videos").hidden = !CONFIG.videos.length;
+  $("uso").hidden = !CONFIG.usage;
   $("meta").replaceChildren(...metaRows.map(([k,v]) => el("li",{},[el("span",{class:"mono k",text:k}), el("span",{class:"v",text:v})])));
 
   $("noteLabel").textContent = t.noteLabel;
@@ -385,10 +391,11 @@ function render(){
     el("figcaption",{class:"mono", text:`${CONFIG.code} ${pad(i+1)} · ${L(p.label)}`})
   ])));
   $("dlText").textContent = t.dlText(L(CONFIG.availableUntil));
-  $("dlBtns").replaceChildren(linkBtn(CONFIG.downloads.all, t.dlAll, false), linkBtn(CONFIG.downloads.web, t.dlWeb, true));
+  $("dlBtns").replaceChildren(linkBtn(CONFIG.downloads.all, t.dlAll, false), ...(CONFIG.downloads.web ? [linkBtn(CONFIG.downloads.web, t.dlWeb, true)] : []));
+  $("photoGrid").classList.toggle("three", CONFIG.photos.length % 3 === 0 && CONFIG.photos.length % 4 !== 0);
 
   $("uTitle").textContent = t.uTitle;
-  $("usage").replaceChildren(...L(CONFIG.usage).map(([h,p]) => el("div",{},[el("h3",{text:h}), el("p",{text:p})])));
+  $("usage").replaceChildren(...(L(CONFIG.usage) || []).map(([h,p]) => el("div",{},[el("h3",{text:h}), el("p",{text:p})])));
 
   $("nTitle").textContent = t.nTitle;
   $("asks").replaceChildren(...t.asks.map(([s,d]) => el("li",{},[el("strong",{text:s}), el("span",{text:d})])));
