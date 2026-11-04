@@ -384,7 +384,7 @@ function render(){
     return el("article",{class:"vcard"},[
       el("div",{class:"film "+(vertical?"v916":"v169")},[el("div",{class:"pic"},[media(v.poster, i+2, v.format, false, false)])]),
       el("h3",{text:L(v.title)}),
-      el("div",{class:"info mono"},[el("span",{text:v.format}), el("span",{text:v.length}), el("span",{text:`${CONFIG.code} ${pad(i+1)}V`})]),
+      el("div",{class:"info mono"},[el("span",{text:v.format}), ...(v.length ? [el("span",{text:v.length})] : []), el("span",{text:`${CONFIG.code} ${pad(i+1)}V`})]),
       el("div",{class:"btns"},[playBtn(v, t.view), ...(v.drive ? [linkBtn(v.drive, t.dl, true)] : [])])
     ]);
   }));
