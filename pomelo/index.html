@@ -99,6 +99,11 @@ section.block{padding-block:var(--s5)}
 .photos .pic img{object-position:center}
 .photos figcaption{color:var(--muted)}
 .photos.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.photos.real{display:block;columns:4 220px;column-gap:var(--s3)}
+.photos.real figure{break-inside:avoid;margin-bottom:var(--s3)}
+.photos.real .film,.photos.real .film.tall{aspect-ratio:auto}
+.photos.real .pic img{height:auto}
+@media (max-width:560px){.photos.real{columns:2;column-gap:var(--s2)}.photos.real figure{margin-bottom:var(--s2)}}
 @media (max-width:900px){.photos{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:560px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dl-row{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s4);padding:var(--s4);background:var(--surface);border-radius:6px}
@@ -215,54 +220,161 @@ button.btn{font-family:var(--f-body)}
    Links: pega el link de Drive / Vimeo / YouTube (no listado).
    ============================================================ */
 const CONFIG = {
-  demo: false,
-  lang: "es",
-  code: "PMLO",
-  client: "Hotel Pomelo",
-  sub: { es: "Troncones, Guerrero", en: "Troncones, Guerrero" },
-  shootDate: { es: "Septiembre 2026", en: "September 2026" },
-  deliveredDate: { es: "Septiembre 2026", en: "September 2026" },
-  location: "Troncones, Guerrero",
-  availableUntil: null,
-  heroVideo: null,
-  heroImage: "portada.jpg",
-  note: {
-    es: "Angela, gracias por abrirme las puertas de Pomelo. Buscábamos imágenes naturales y cuidadas, que contaran el hotel tal como es. Aquí tienes una selección y, abajo, la galería completa en alta lista para usar.",
-    en: "Angela, thanks for opening up Pomelo to me. We wanted images that felt natural and considered, showing the hotel as it really is. Here’s a selection, and below, the full gallery in high resolution, ready to use."
+  "demo": false,
+  "lang": "es",
+  "code": "PMLO",
+  "client": "Hotel Pomelo",
+  "sub": {
+    "es": "Troncones, Guerrero",
+    "en": "Troncones, Guerrero"
   },
-  videos: [],
-  photoTotal: 150,
-  photos: [
-    { src: "01.jpg", label: { es: "Alberca", en: "Pool" } },
-    { src: "02.jpg", label: { es: "Palmeras", en: "Palms" } },
-    { src: "03.jpg", label: { es: "Habitación", en: "Room" }, tall: true },
-    { src: "04.jpg", label: { es: "Baño", en: "Bathroom" }, tall: true }
+  "shootDate": {
+    "es": "Septiembre 2026",
+    "en": "September 2026"
+  },
+  "deliveredDate": {
+    "es": "Septiembre 2026",
+    "en": "September 2026"
+  },
+  "location": "Troncones, Guerrero",
+  "availableUntil": null,
+  "heroVideo": null,
+  "heroImage": "portada.jpg",
+  "note": {
+    "es": "Angela, Fran, gracias por abrirme las puertas de Pomelo. Buscábamos imágenes naturales y cuidadas, que contaran el hotel tal como es: la playa, las habitaciones, la mesa y ustedes. Aquí tienen una selección y, abajo, la galería completa en alta, lista para usar.",
+    "en": "Angela, Fran, thank you for opening up Pomelo to me. We wanted images that felt natural and considered, showing the hotel as it really is: the beach, the rooms, the table and the two of you. Here’s a selection, and below, the full gallery in high resolution, ready to use."
+  },
+  "videos": [],
+  "photoTotal": 150,
+  "photos": [
+    {
+      "src": "01.jpg",
+      "label": {
+        "es": "Angela y Fran",
+        "en": "Angela & Fran"
+      }
+    },
+    {
+      "src": "02.jpg",
+      "label": {
+        "es": "Alberca",
+        "en": "Pool"
+      }
+    },
+    {
+      "src": "03.jpg",
+      "label": {
+        "es": "Hamaca",
+        "en": "Hammock"
+      }
+    },
+    {
+      "src": "04.jpg",
+      "label": {
+        "es": "Desayuno",
+        "en": "Breakfast"
+      }
+    },
+    {
+      "src": "05.jpg",
+      "label": {
+        "es": "Tablas",
+        "en": "Boards"
+      }
+    },
+    {
+      "src": "06.jpg",
+      "label": {
+        "es": "Angela",
+        "en": "Angela"
+      }
+    },
+    {
+      "src": "07.jpg",
+      "label": {
+        "es": "Baño",
+        "en": "Bathroom"
+      }
+    },
+    {
+      "src": "08.jpg",
+      "label": {
+        "es": "Barra",
+        "en": "Bar"
+      }
+    },
+    {
+      "src": "09.jpg",
+      "label": {
+        "es": "Mesa en la playa",
+        "en": "Beach table"
+      }
+    },
+    {
+      "src": "10.jpg",
+      "label": {
+        "es": "Fran",
+        "en": "Fran"
+      }
+    },
+    {
+      "src": "11.jpg",
+      "label": {
+        "es": "Alberca",
+        "en": "Pool"
+      }
+    },
+    {
+      "src": "12.jpg",
+      "label": {
+        "es": "Frente al mar",
+        "en": "Seafront"
+      }
+    }
   ],
-  downloads: {
-    all: "https://drive.google.com/drive/folders/1YLWxnViEmUMUJURztk5PbMWvTBCUYyMK",
-    web: null
+  "downloads": {
+    "all": "https://drive.google.com/drive/folders/1YLWxnViEmUMUJURztk5PbMWvTBCUYyMK",
+    "web": null
   },
-  usage: {
-    es: [
-      ["Guarda una copia", "Descarga la carpeta completa y guárdala en vuestro equipo o en vuestro propio Drive."],
-      ["Formatos", "Archivos JPG en alta resolución, sin marca de agua, listos para web, redes e impresión."],
-      ["Crédito", "En redes, una mención a @manugaldamez_ se agradece mucho."]
+  "usage": {
+    "es": [
+      [
+        "Guarda una copia",
+        "Descarga la carpeta completa y guarda una copia en tu equipo o en tu propio Drive."
+      ],
+      [
+        "Formatos",
+        "Archivos JPG en alta resolución, sin marca de agua, listos para web, redes e impresión."
+      ],
+      [
+        "Crédito",
+        "En redes, una mención a @manugaldamez_ se agradece mucho."
+      ]
     ],
-    en: [
-      ["Keep a copy", "Download the full folder and save it to your own computer or drive."],
-      ["Formats", "High-resolution JPG files with no watermark, ready for web, social and print."],
-      ["Credit", "On social, a tag to @manugaldamez_ is always appreciated."]
+    "en": [
+      [
+        "Keep a copy",
+        "Download the full folder and save it to your own computer or drive."
+      ],
+      [
+        "Formats",
+        "High-resolution JPG files with no watermark, ready for web, social and print."
+      ],
+      [
+        "Credit",
+        "On social, a tag to @manugaldamez_ is always appreciated."
+      ]
     ]
   },
-  email: "manuelgaldamezfoto@gmail.com",
-  website: "https://www.instagram.com/manugaldamez_/",
-  instagram: "@manugaldamez_"
+  "email": "manuelgaldamezfoto@gmail.com",
+  "website": "https://www.instagram.com/manugaldamez_/",
+  "instagram": "@manugaldamez_"
 };
 
 const T = {
   es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
        noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
-       dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en vuestro equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en vuestro equipo.`,
+       dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en tu equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en tu equipo.`,
        dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te ha gustado",
        asks:[["Una reseña corta","Dos líneas sobre cómo fue trabajar juntos. Me ayuda más que cualquier anuncio."],["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
        copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el vídeo de Drive" },
@@ -383,7 +495,9 @@ function render(){
   ])));
   $("dlText").textContent = t.dlText(L(CONFIG.availableUntil));
   $("dlBtns").replaceChildren(linkBtn(CONFIG.downloads.all, t.dlAll, false), ...(CONFIG.downloads.web ? [linkBtn(CONFIG.downloads.web, t.dlWeb, true)] : []));
-  $("photoGrid").classList.toggle("three", CONFIG.photos.length % 3 === 0 && CONFIG.photos.length % 4 !== 0);
+  const real = CONFIG.photos.every(p => p.src);
+  $("photoGrid").classList.toggle("real", real);
+  $("photoGrid").classList.toggle("three", !real && CONFIG.photos.length % 3 === 0 && CONFIG.photos.length % 4 !== 0);
 
   $("uTitle").textContent = t.uTitle;
   $("usage").replaceChildren(...(L(CONFIG.usage) || []).map(([h,p]) => el("div",{},[el("h3",{text:h}), el("p",{text:p})])));

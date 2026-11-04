@@ -99,6 +99,11 @@ section.block{padding-block:var(--s5)}
 .photos .pic img{object-position:center}
 .photos figcaption{color:var(--muted)}
 .photos.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.photos.real{display:block;columns:4 220px;column-gap:var(--s3)}
+.photos.real figure{break-inside:avoid;margin-bottom:var(--s3)}
+.photos.real .film,.photos.real .film.tall{aspect-ratio:auto}
+.photos.real .pic img{height:auto}
+@media (max-width:560px){.photos.real{columns:2;column-gap:var(--s2)}.photos.real figure{margin-bottom:var(--s2)}}
 @media (max-width:900px){.photos{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:560px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dl-row{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s4);padding:var(--s4);background:var(--surface);border-radius:6px}
@@ -271,7 +276,7 @@ const CONFIG = {
 const T = {
   es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
        noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
-       dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en vuestro equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en vuestro equipo.`,
+       dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en tu equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en tu equipo.`,
        dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te ha gustado",
        asks:[["Una reseña corta","Dos líneas sobre cómo fue trabajar juntos. Me ayuda más que cualquier anuncio."],["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
        copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el vídeo de Drive" },
@@ -392,7 +397,9 @@ function render(){
   ])));
   $("dlText").textContent = t.dlText(L(CONFIG.availableUntil));
   $("dlBtns").replaceChildren(linkBtn(CONFIG.downloads.all, t.dlAll, false), ...(CONFIG.downloads.web ? [linkBtn(CONFIG.downloads.web, t.dlWeb, true)] : []));
-  $("photoGrid").classList.toggle("three", CONFIG.photos.length % 3 === 0 && CONFIG.photos.length % 4 !== 0);
+  const real = CONFIG.photos.every(p => p.src);
+  $("photoGrid").classList.toggle("real", real);
+  $("photoGrid").classList.toggle("three", !real && CONFIG.photos.length % 3 === 0 && CONFIG.photos.length % 4 !== 0);
 
   $("uTitle").textContent = t.uTitle;
   $("usage").replaceChildren(...(L(CONFIG.usage) || []).map(([h,p]) => el("div",{},[el("h3",{text:h}), el("p",{text:p})])));

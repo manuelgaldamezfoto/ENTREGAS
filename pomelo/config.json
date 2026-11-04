@@ -1,0 +1,151 @@
+{
+  "demo": false,
+  "lang": "es",
+  "code": "PMLO",
+  "client": "Hotel Pomelo",
+  "sub": {
+    "es": "Troncones, Guerrero",
+    "en": "Troncones, Guerrero"
+  },
+  "shootDate": {
+    "es": "Septiembre 2026",
+    "en": "September 2026"
+  },
+  "deliveredDate": {
+    "es": "Septiembre 2026",
+    "en": "September 2026"
+  },
+  "location": "Troncones, Guerrero",
+  "availableUntil": null,
+  "heroVideo": null,
+  "heroImage": "portada.jpg",
+  "note": {
+    "es": "Angela, Fran, gracias por abrirme las puertas de Pomelo. Buscábamos imágenes naturales y cuidadas, que contaran el hotel tal como es: la playa, las habitaciones, la mesa y ustedes. Aquí tienen una selección y, abajo, la galería completa en alta, lista para usar.",
+    "en": "Angela, Fran, thank you for opening up Pomelo to me. We wanted images that felt natural and considered, showing the hotel as it really is: the beach, the rooms, the table and the two of you. Here’s a selection, and below, the full gallery in high resolution, ready to use."
+  },
+  "videos": [],
+  "photoTotal": 150,
+  "photos": [
+    {
+      "src": "01.jpg",
+      "label": {
+        "es": "Angela y Fran",
+        "en": "Angela & Fran"
+      }
+    },
+    {
+      "src": "02.jpg",
+      "label": {
+        "es": "Alberca",
+        "en": "Pool"
+      }
+    },
+    {
+      "src": "03.jpg",
+      "label": {
+        "es": "Hamaca",
+        "en": "Hammock"
+      }
+    },
+    {
+      "src": "04.jpg",
+      "label": {
+        "es": "Desayuno",
+        "en": "Breakfast"
+      }
+    },
+    {
+      "src": "05.jpg",
+      "label": {
+        "es": "Tablas",
+        "en": "Boards"
+      }
+    },
+    {
+      "src": "06.jpg",
+      "label": {
+        "es": "Angela",
+        "en": "Angela"
+      }
+    },
+    {
+      "src": "07.jpg",
+      "label": {
+        "es": "Baño",
+        "en": "Bathroom"
+      }
+    },
+    {
+      "src": "08.jpg",
+      "label": {
+        "es": "Barra",
+        "en": "Bar"
+      }
+    },
+    {
+      "src": "09.jpg",
+      "label": {
+        "es": "Mesa en la playa",
+        "en": "Beach table"
+      }
+    },
+    {
+      "src": "10.jpg",
+      "label": {
+        "es": "Fran",
+        "en": "Fran"
+      }
+    },
+    {
+      "src": "11.jpg",
+      "label": {
+        "es": "Alberca",
+        "en": "Pool"
+      }
+    },
+    {
+      "src": "12.jpg",
+      "label": {
+        "es": "Frente al mar",
+        "en": "Seafront"
+      }
+    }
+  ],
+  "downloads": {
+    "all": "https://drive.google.com/drive/folders/1YLWxnViEmUMUJURztk5PbMWvTBCUYyMK",
+    "web": null
+  },
+  "usage": {
+    "es": [
+      [
+        "Guarda una copia",
+        "Descarga la carpeta completa y guarda una copia en tu equipo o en tu propio Drive."
+      ],
+      [
+        "Formatos",
+        "Archivos JPG en alta resolución, sin marca de agua, listos para web, redes e impresión."
+      ],
+      [
+        "Crédito",
+        "En redes, una mención a @manugaldamez_ se agradece mucho."
+      ]
+    ],
+    "en": [
+      [
+        "Keep a copy",
+        "Download the full folder and save it to your own computer or drive."
+      ],
+      [
+        "Formats",
+        "High-resolution JPG files with no watermark, ready for web, social and print."
+      ],
+      [
+        "Credit",
+        "On social, a tag to @manugaldamez_ is always appreciated."
+      ]
+    ]
+  },
+  "email": "manuelgaldamezfoto@gmail.com",
+  "website": "https://www.instagram.com/manugaldamez_/",
+  "instagram": "@manugaldamez_"
+}
