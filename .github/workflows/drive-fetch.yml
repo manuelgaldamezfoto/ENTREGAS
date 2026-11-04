@@ -1,0 +1,35 @@
+name: Descargar miniaturas de Drive
+on:
+  push:
+    branches: [main]
+    paths: ["_jobs/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: drive-fetch
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar rama drive-cache
+        run: |
+          git config user.name "entregas-bot"
+          git config user.email "entregas-bot@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin drive-cache; then
+            git fetch --depth 1 origin drive-cache
+            git worktree add cache origin/drive-cache
+            cd cache && git checkout -B drive-cache && cd ..
+          else
+            git worktree add --detach cache
+            cd cache && git checkout --orphan drive-cache && git rm -rfq . && cd ..
+          fi
+      - name: Descargar
+        run: python3 scripts/drive_fetch.py cache
+      - name: Subir a drive-cache
+        run: |
+          cd cache
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -qm "Miniaturas de Drive"
+          git push origin drive-cache
