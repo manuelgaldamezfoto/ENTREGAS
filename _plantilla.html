@@ -1,0 +1,350 @@
+<title>Entrega Hotel Pomelo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: hoja de contactos de carrete — un plano grande arriba, datos como código de borde de película, material en tiras, cierre con siguiente paso */
+:root{
+  --bg:#EDEDE9; --surface:#E4E4DF; --fg:#151614; --muted:#666963; --line:#CFD0CA;
+  --accent:#335F70; --frame:#111210; --on-accent:#F4F4F0;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --s1:.25rem; --s2:.5rem; --s3:1rem; --s4:1.5rem; --s5:2.5rem; --s6:4rem; --s7:6rem;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121311; --surface:#1A1C19; --fg:#E8E8E3; --muted:#90948D; --line:#2B2E2A;
+  --accent:#8CB6C4; --frame:#050605; --on-accent:#0E1A1F; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#121311; --surface:#1A1C19; --fg:#E8E8E3; --muted:#90948D; --line:#2B2E2A;
+  --accent:#8CB6C4; --frame:#050605; --on-accent:#0E1A1F; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+
+.demo{background:var(--accent);color:var(--on-accent)}
+.demo .wrap{padding-block:.5rem;display:flex;gap:var(--s3);justify-content:space-between;flex-wrap:wrap}
+
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding-block:var(--s4)}
+.brand{font-family:var(--f-display);font-variation-settings:"wdth" 100;font-weight:600;font-size:1rem;letter-spacing:.01em;text-decoration:none}
+.top-right{display:flex;align-items:center;gap:var(--s4);color:var(--muted)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;background:none;border:0;color:var(--muted);padding:.3rem .7rem;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+
+/* película: marco fino, irregular, esquinas suaves */
+.film{position:relative;background:var(--frame);padding:clamp(6px,1.1vw,12px);border-radius:5px 7px 4px 6px;max-width:100%}
+.film::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.film > .pic{display:block;width:100%;height:100%;border-radius:2px 3px 2px 3px;overflow:hidden;background:#2a2c29}
+.pic canvas,.pic video,.pic img{display:block;width:100%;height:100%;object-fit:cover}
+
+.hero{padding-block:var(--s2) var(--s5)}
+.hero .film{aspect-ratio:21/9}
+.edge{display:flex;justify-content:space-between;gap:var(--s3);color:var(--muted);padding-top:var(--s2)}
+.title{margin:var(--s5) 0 0;font-family:var(--f-display);font-variation-settings:"wdth" 68;font-weight:700;text-transform:uppercase;line-height:.88;letter-spacing:-.005em;font-size:clamp(3.2rem,11vw,9.5rem);text-wrap:balance}
+.subtitle{margin:var(--s3) 0 0;font-family:var(--f-display);font-variation-settings:"wdth" 90;font-weight:300;font-size:clamp(1.15rem,2.4vw,1.6rem);color:var(--muted)}
+
+.meta{list-style:none;margin:var(--s5) 0 0;padding:var(--s3) 0 0;border-top:1px solid var(--fg);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s3)}
+.meta li{display:flex;flex-direction:column;gap:var(--s1);min-width:0}
+.meta .k{color:var(--muted)}
+.meta .v{font-family:var(--f-body);font-size:1.05rem;font-weight:500;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.meta{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.note{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--s4);padding-block:var(--s6) var(--s5)}
+.note p{margin:0;max-width:60ch;font-size:1.15rem;line-height:1.65}
+.note .sign{margin-top:var(--s3);color:var(--muted);font-size:1rem}
+@media (max-width:760px){.note{grid-template-columns:1fr}}
+
+section.block{padding-block:var(--s5)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:var(--s3);flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:var(--s3);margin-bottom:var(--s4)}
+.sec-head h2{margin:0;font-family:var(--f-display);font-variation-settings:"wdth" 75;font-weight:600;text-transform:uppercase;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1;letter-spacing:.005em}
+.sec-head .count{color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:.55rem;font:inherit;font-weight:600;font-size:.95rem;text-decoration:none;padding:.7rem 1.1rem;border-radius:999px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn.ghost{background:transparent;color:var(--fg)}
+.btn .arr{font-family:var(--f-mono);font-weight:400}
+.btns{display:flex;gap:var(--s2);flex-wrap:wrap}
+
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.vcard{display:flex;flex-direction:column;gap:var(--s3);min-width:0}
+.vcard .film.v169{aspect-ratio:16/9}
+.vcard .film.v916{aspect-ratio:16/9}
+.vcard .film.v916 .pic{width:auto;aspect-ratio:9/16;margin:0 auto}
+.vcard h3{margin:0;font-family:var(--f-display);font-variation-settings:"wdth" 90;font-weight:600;font-size:1.2rem;line-height:1.2}
+.vcard .info{display:flex;gap:var(--s3);color:var(--muted)}
+@media (max-width:900px){.videos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.videos{grid-template-columns:1fr}}
+
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.photos figure{margin:0;display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.photos .film{aspect-ratio:3/2}
+.photos .film.tall{aspect-ratio:4/5}
+.photos figcaption{color:var(--muted)}
+@media (max-width:900px){.photos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dl-row{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s4);padding:var(--s4);background:var(--surface);border-radius:6px}
+.dl-row p{margin:0;color:var(--muted);max-width:52ch}
+
+.usage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.usage div{min-width:0;border-top:1px solid var(--fg);padding-top:var(--s3)}
+.usage h3{margin:0 0 var(--s2);font-size:1rem;font-weight:600}
+.usage p{margin:0;color:var(--muted)}
+@media (max-width:760px){.usage{grid-template-columns:1fr}}
+
+.next{padding-block:var(--s6) var(--s5)}
+.next .grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--s5);align-items:start}
+.next h2{margin:0;font-family:var(--f-display);font-variation-settings:"wdth" 70;font-weight:700;text-transform:uppercase;font-size:clamp(2rem,5.5vw,4rem);line-height:.92;text-wrap:balance}
+.asks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.asks li{display:flex;flex-direction:column;gap:var(--s1);padding-block:var(--s3);border-bottom:1px solid var(--line)}
+.asks li:first-child{border-top:1px solid var(--line)}
+.asks strong{font-weight:600}
+.asks span{color:var(--muted)}
+@media (max-width:760px){.next .grid{grid-template-columns:1fr}}
+
+.contact{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-top:var(--s4)}
+.contact code{font-family:var(--f-mono);font-size:.9rem;user-select:all;background:var(--surface);padding:.55rem .8rem;border-radius:4px;overflow-wrap:anywhere}
+.copied{color:var(--accent)}
+
+footer .wrap{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;padding-block:var(--s5);border-top:1px solid var(--line);color:var(--muted)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="demo" id="demoBar" hidden><div class="wrap mono"><span id="demoText"></span><span>manugaldamez</span></div></div>
+
+<header class="top"><div class="wrap">
+  <a class="brand" id="brand" href="#" target="_blank" rel="noopener">Manu Galdámez</a>
+  <div class="top-right">
+    <span class="mono" id="topLabel"></span>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" id="lang-es" data-lang="es">ES</button>
+      <button type="button" id="lang-en" data-lang="en">EN</button>
+    </div>
+  </div>
+</div></header>
+
+<main>
+  <section class="hero"><div class="wrap">
+    <div class="film"><div class="pic" id="heroPic"></div></div>
+    <div class="edge mono"><span id="edgeL"></span><span id="edgeR"></span></div>
+    <h1 class="title" id="clientName"></h1>
+    <p class="subtitle" id="clientSub"></p>
+    <ul class="meta" id="meta"></ul>
+  </div></section>
+
+  <section><div class="wrap note">
+    <span class="mono" id="noteLabel" style="color:var(--muted)"></span>
+    <div><p id="noteText"></p><p class="sign" id="noteSign"></p></div>
+  </div></section>
+
+  <section class="block" id="videos"><div class="wrap">
+    <div class="sec-head"><h2 id="vTitle"></h2><span class="mono count" id="vCount"></span></div>
+    <div class="videos" id="videoGrid"></div>
+  </div></section>
+
+  <section class="block" id="fotos"><div class="wrap">
+    <div class="sec-head"><h2 id="pTitle"></h2><span class="mono count" id="pCount"></span></div>
+    <div class="photos" id="photoGrid"></div>
+    <div class="dl-row">
+      <p id="dlText"></p>
+      <div class="btns" id="dlBtns"></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="uso"><div class="wrap">
+    <div class="sec-head"><h2 id="uTitle"></h2></div>
+    <div class="usage" id="usage"></div>
+  </div></section>
+
+  <section class="next"><div class="wrap grid">
+    <div>
+      <h2 id="nTitle"></h2>
+      <div class="contact">
+        <code id="email"></code>
+        <button type="button" class="btn ghost" id="copyBtn"></button>
+      </div>
+    </div>
+    <ul class="asks" id="asks"></ul>
+  </div></section>
+</main>
+
+<footer><div class="wrap mono"><span id="footL"></span><span id="footR"></span></div></footer>
+
+<script>
+/* ============================================================
+   CONFIG — lo único que cambias en cada entrega.
+   Rutas de foto/vídeo: deja null para ver el marcador gris.
+   Links: pega el link de Drive / Vimeo / YouTube (no listado).
+   ============================================================ */
+const CONFIG = {
+  demo: true,                       // false para quitar la franja azul de "plantilla"
+  lang: "es",                       // idioma por defecto: "es" o "en"
+  code: "PMLO",                     // 4 letras para el código de borde
+  client: "Hotel Pomelo",
+  sub: { es: "y El Chiringuito de Fran · Troncones", en: "and El Chiringuito de Fran · Troncones" },
+  shootDate: { es: "Septiembre 2026", en: "September 2026" },
+  deliveredDate: { es: "Octubre 2026", en: "October 2026" },
+  location: "Troncones, Guerrero",
+  availableUntil: { es: "31 de enero de 2027", en: "January 31, 2027" },
+  heroVideo: null,                  // ej. "loop.mp4" — 10–15 s, sin audio, menos de 8 MB
+  note: {
+    es: "Angela, aquí tienes todo el material de la sesión. Buscamos algo relajado pero cuidado, y creo que se nota. Abajo están los vídeos en los dos formatos, la selección de fotos y el enlace para descargarlo todo en alta.",
+    en: "Angela, here’s everything from the shoot. We were going for relaxed but considered, and I think it shows. Below you’ll find the videos in both formats, the photo selection and the link to download everything in full resolution."
+  },
+  videos: [
+    { title: { es: "Pomelo — pieza principal", en: "Pomelo — main piece" }, format: "16:9", length: "1:30", poster: null, view: "#", download: "#" },
+    { title: { es: "Reel habitaciones", en: "Rooms reel" }, format: "9:16", length: "0:30", poster: null, view: "#", download: "#" },
+    { title: { es: "Reel Chiringuito", en: "Chiringuito reel" }, format: "9:16", length: "0:25", poster: null, view: "#", download: "#" }
+  ],
+  photoTotal: 0,                    // nº total de fotos entregadas (0 = no se muestra)
+  photos: [                         // selección para la página (6–12). tall:true para verticales
+    { src: null, label: { es: "Habitación", en: "Room" } },
+    { src: null, label: { es: "Terraza", en: "Terrace" }, tall: true },
+    { src: null, label: { es: "Chiringuito", en: "Chiringuito" } },
+    { src: null, label: { es: "Surf", en: "Surf" }, tall: true },
+    { src: null, label: { es: "Detalle", en: "Detail" } },
+    { src: null, label: { es: "Atardecer", en: "Sunset" } },
+    { src: null, label: { es: "Lifestyle", en: "Lifestyle" }, tall: true },
+    { src: null, label: { es: "Espacios", en: "Spaces" } }
+  ],
+  downloads: {
+    all: "#",                       // ZIP o carpeta en alta (Drive)
+    web: "#"                        // carpeta optimizada para web y redes
+  },
+  usage: {
+    es: [
+      ["Dónde se puede usar", "Web, redes sociales, Google Maps, plataformas de reservas y material impreso del hotel."],
+      ["Qué necesita permiso", "Campañas de pago con terceros, venta del material o cesión a otras marcas. Escríbeme y lo vemos."],
+      ["Crédito", "En redes, una mención a @manugaldamez_ se agradece mucho."]
+    ],
+    en: [
+      ["Where you can use it", "Website, social media, Google Maps, booking platforms and the hotel’s printed materials."],
+      ["What needs permission", "Paid campaigns with third parties, reselling, or passing the material to other brands. Just ask."],
+      ["Credit", "On social, a tag to @manugaldamez_ is always appreciated."]
+    ]
+  },
+  email: "manuelgaldamezfoto@gmail.com",
+  website: "https://manugaldamezphotography.com",
+  instagram: "@manugaldamez_"
+};
+
+const T = {
+  es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
+       noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
+       dlText:u=>`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en vuestro equipo.`,
+       dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te ha gustado",
+       asks:[["Una reseña corta","Dos líneas sobre cómo fue trabajar juntos. Me ayuda más que cualquier anuncio."],["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
+       copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s" },
+  en:{ demo:"Delivery template · Hotel Pomelo example", top:"Delivery", shot:"Shoot", loc:"Location", vids:"Videos", pics:"Photos", deliv:"Delivered",
+       noteLabel:"Note", vTitle:"Videos", pTitle:"Photos", sel:"selection", ofTotal:n=>`selection of ${n}`, view:"Watch", dl:"Download",
+       dlText:u=>`The full folder is high resolution with no watermark. It will be available until ${u}, so please save it to your own drive.`,
+       dlAll:"Download everything", dlWeb:"Web & social version", uTitle:"Using the material", nTitle:"If you liked it",
+       asks:[["A short review","Two lines on what it was like working together. It helps me more than any ad."],["Next season","High season, new rooms or a new menu: I can put together a proposal to refresh your content."],["Know someone?","If another hotel or business nearby needs photo or video, feel free to pass this link along."]],
+       copy:"Copy email", copied:"Copied", placeholder:"Your photo here", heroPh:"10–15 s loop" }
+};
+
+const L = v => (v && typeof v === "object" && !Array.isArray(v)) ? (v[lang] ?? v.es) : v;
+const $ = id => document.getElementById(id);
+const el = (tag, attrs={}, kids=[]) => { const e=document.createElement(tag); for(const[k,v] of Object.entries(attrs)){ if(k==="text") e.textContent=v; else if(k==="class") e.className=v; else e.setAttribute(k,v);} kids.forEach(c=>e.append(c)); return e; };
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let lang = CONFIG.lang;
+try { const s = localStorage.getItem("entrega-lang"); if (s === "es" || s === "en") lang = s; } catch(e) {}
+
+/* marcador: grano de película sobre un degradado suave, generado en canvas */
+const tones = [["#7c8a86","#c9c2b3"],["#5d7480","#b9c4c3"],["#8a8172","#d6cdbb"],["#4f5f5a","#a7b1a8"],["#6f7b82","#cfd3cc"]];
+function grainCanvas(seed, label, animate){
+  const c = document.createElement("canvas"); const w = 360, h = 240; c.width=w; c.height=h;
+  const ctx = c.getContext("2d"); const [a,b] = tones[seed % tones.length];
+  const noise = document.createElement("canvas"); noise.width=w; noise.height=h; const nctx = noise.getContext("2d");
+  function draw(){
+    const g = ctx.createLinearGradient(0,0,w*.3,h); g.addColorStop(0,b); g.addColorStop(1,a);
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    const img = nctx.createImageData(w,h);
+    for(let i=0;i<img.data.length;i+=4){ const n=Math.random()*255; img.data[i]=img.data[i+1]=img.data[i+2]=n; img.data[i+3]=28; }
+    nctx.putImageData(img,0,0); ctx.drawImage(noise,0,0);
+    ctx.fillStyle="rgba(255,255,255,.75)"; ctx.font="500 11px 'IBM Plex Mono', monospace"; ctx.textAlign="center";
+    ctx.fillText(label.toUpperCase(), w/2, h/2+4);
+  }
+  draw();
+  if (animate && !reduce){ let t=0; (function loop(){ if(++t%4===0) draw(); requestAnimationFrame(loop); })(); }
+  return c;
+}
+function media(src, seed, label, isVideo, animate){
+  if (!src) return grainCanvas(seed, label, animate);
+  if (isVideo){ const v=el("video",{src, muted:"", autoplay:"", loop:"", playsinline:""}); v.muted=true; return v; }
+  return el("img",{src, alt:label, loading:"lazy"});
+}
+const pad = n => String(n).padStart(3,"0");
+const linkBtn = (href, text, ghost) => el("a",{class:"btn"+(ghost?" ghost":""), href, target:"_blank", rel:"noopener"},[document.createTextNode(text+" "), el("span",{class:"arr", text:"↗"})]);
+
+function render(){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  $("lang-es").setAttribute("aria-pressed", lang==="es"); $("lang-en").setAttribute("aria-pressed", lang==="en");
+  $("demoBar").hidden = !CONFIG.demo; $("demoText").textContent = t.demo;
+  $("brand").href = CONFIG.website;
+  $("topLabel").textContent = `${t.top} · ${L(CONFIG.deliveredDate)}`;
+
+  $("heroPic").replaceChildren(media(CONFIG.heroVideo, 1, t.heroPh, true, true));
+  $("edgeL").textContent = `${CONFIG.code} ${L(CONFIG.shootDate).toUpperCase()}`;
+  $("edgeR").textContent = `▸ 01A`;
+  $("clientName").textContent = CONFIG.client;
+  $("clientSub").textContent = L(CONFIG.sub);
+
+  const metaRows = [[t.shot, L(CONFIG.shootDate)],[t.loc, CONFIG.location],[t.vids, String(CONFIG.videos.length)],[t.pics, String(CONFIG.photoTotal || CONFIG.photos.length)],[t.deliv, L(CONFIG.deliveredDate)]];
+  $("meta").replaceChildren(...metaRows.map(([k,v]) => el("li",{},[el("span",{class:"mono k",text:k}), el("span",{class:"v",text:v})])));
+
+  $("noteLabel").textContent = t.noteLabel;
+  $("noteText").textContent = L(CONFIG.note);
+  $("noteSign").textContent = "— Manu";
+
+  $("vTitle").textContent = t.vTitle; $("vCount").textContent = `${CONFIG.videos.length} ${t.vids.toLowerCase()}`;
+  $("videoGrid").replaceChildren(...CONFIG.videos.map((v,i) => {
+    const vertical = v.format === "9:16";
+    return el("article",{class:"vcard"},[
+      el("div",{class:"film "+(vertical?"v916":"v169")},[el("div",{class:"pic"},[media(v.poster, i+2, v.format, false, false)])]),
+      el("h3",{text:L(v.title)}),
+      el("div",{class:"info mono"},[el("span",{text:v.format}), el("span",{text:v.length}), el("span",{text:`${CONFIG.code} ${pad(i+1)}V`})]),
+      el("div",{class:"btns"},[linkBtn(v.view, t.view, false), linkBtn(v.download, t.dl, true)])
+    ]);
+  }));
+
+  $("pTitle").textContent = t.pTitle;
+  $("pCount").textContent = CONFIG.photoTotal ? t.ofTotal(CONFIG.photoTotal) : `${CONFIG.photos.length} · ${t.sel}`;
+  $("photoGrid").replaceChildren(...CONFIG.photos.map((p,i) => el("figure",{},[
+    el("div",{class:"film"+(p.tall?" tall":"")},[el("div",{class:"pic"},[media(p.src, i, p.src ? L(p.label) : t.placeholder, false, false)])]),
+    el("figcaption",{class:"mono", text:`${CONFIG.code} ${pad(i+1)} · ${L(p.label)}`})
+  ])));
+  $("dlText").textContent = t.dlText(L(CONFIG.availableUntil));
+  $("dlBtns").replaceChildren(linkBtn(CONFIG.downloads.all, t.dlAll, false), linkBtn(CONFIG.downloads.web, t.dlWeb, true));
+
+  $("uTitle").textContent = t.uTitle;
+  $("usage").replaceChildren(...L(CONFIG.usage).map(([h,p]) => el("div",{},[el("h3",{text:h}), el("p",{text:p})])));
+
+  $("nTitle").textContent = t.nTitle;
+  $("asks").replaceChildren(...t.asks.map(([s,d]) => el("li",{},[el("strong",{text:s}), el("span",{text:d})])));
+  $("email").textContent = CONFIG.email;
+  $("copyBtn").textContent = t.copy; $("copyBtn").classList.remove("copied");
+
+  $("footL").textContent = `Manu Galdámez · ${CONFIG.instagram}`;
+  $("footR").textContent = `${CONFIG.client} · ${L(CONFIG.deliveredDate)}`;
+}
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.lang; try { localStorage.setItem("entrega-lang", lang); } catch(e) {} render();
+}));
+$("copyBtn").addEventListener("click", () => {
+  const b = $("copyBtn");
+  const done = () => { b.textContent = T[lang].copied; b.classList.add("copied"); };
+  const fallback = () => { const r=document.createRange(); r.selectNodeContents($("email")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(CONFIG.email).then(done, fallback); } catch(e) { fallback(); }
+});
+render();
+</script>
