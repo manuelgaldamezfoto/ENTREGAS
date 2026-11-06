@@ -123,6 +123,16 @@ section.block{padding-block:var(--s5)}
 .asks li:first-child{border-top:1px solid var(--line)}
 .asks strong{font-weight:600}
 .asks span{color:var(--muted)}
+.right{display:flex;flex-direction:column;gap:var(--s4);min-width:0}
+.fb{display:flex;flex-direction:column;gap:var(--s2);padding-top:var(--s3);border-top:1px solid var(--line)}
+.fb label{font-weight:600}
+.fb .hint{color:var(--muted);margin:0}
+.fb textarea{font:inherit;font-size:1rem;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.75rem .9rem;min-height:7rem;resize:vertical;width:100%}
+.fb textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.fb .row{display:flex;gap:var(--s3);align-items:center;flex-wrap:wrap}
+.fb .status{color:var(--muted);font-size:.95rem}
+.fb .status.ok{color:var(--accent)}
+.fb .bot{position:absolute;left:-9999px}
 @media (max-width:760px){.next .grid{grid-template-columns:1fr}}
 
 .contact{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-top:var(--s4)}
@@ -202,7 +212,18 @@ button.btn{font-family:var(--f-body)}
         <button type="button" class="btn ghost" id="copyBtn"></button>
       </div>
     </div>
-    <ul class="asks" id="asks"></ul>
+    <div class="right">
+      <form class="fb" id="fbForm" name="feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="feedback">
+        <input type="hidden" name="cliente" id="fbClient" value="">
+        <p class="bot"><label>No rellenar <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <label for="fbText" id="fbLabel">¿Qué tal fue trabajar juntos?</label>
+        <p class="hint" id="fbHint">Opcional. Lo que quieras contarme: lo que funcionó y lo que mejorarías.</p>
+        <textarea id="fbText" name="mensaje" rows="4"></textarea>
+        <div class="row"><button type="submit" class="btn" id="fbBtn">Enviar</button><span class="status" id="fbStatus" role="status"></span></div>
+      </form>
+      <ul class="asks" id="asks"></ul>
+    </div>
   </div></section>
 </main>
 
@@ -277,14 +298,16 @@ const T = {
   es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
        noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
        dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en tu equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en tu equipo.`,
-       dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te ha gustado",
-       asks:[["Una reseña corta","Dos líneas sobre cómo fue trabajar juntos. Me ayuda más que cualquier anuncio."],["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
+       dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te gustó",
+       fbLabel:"¿Qué tal fue trabajar juntos?", fbHint:"Opcional. Lo que quieras contarme: lo que funcionó y lo que mejorarías.", fbSend:"Enviar", fbSending:"Enviando…", fbOk:"Recibido. Gracias por tomarte el tiempo.", fbErr:"No se pudo enviar. Inténtalo de nuevo en un momento.", fbEmpty:"Escribe algo antes de enviar.",
+       asks:[["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
        copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el vídeo de Drive" },
   en:{ demo:"Delivery template · Hotel Pomelo example", top:"Delivery", shot:"Shoot", loc:"Location", vids:"Videos", pics:"Photos", deliv:"Delivered",
        noteLabel:"Note", vTitle:"Videos", pTitle:"Photos", sel:"selection", ofTotal:n=>`selection of ${n}`, view:"Watch", dl:"Download",
        dlText:u=>u?`The full folder is high resolution with no watermark. It will be available until ${u}, so please save it to your own drive.`:`The full folder is high resolution with no watermark. Please download it and keep a copy on your side.`,
        dlAll:"Download everything", dlWeb:"Web & social version", uTitle:"Using the material", nTitle:"If you liked it",
-       asks:[["A short review","Two lines on what it was like working together. It helps me more than any ad."],["Next season","High season, new rooms or a new menu: I can put together a proposal to refresh your content."],["Know someone?","If another hotel or business nearby needs photo or video, feel free to pass this link along."]],
+       fbLabel:"How was it working together?", fbHint:"Optional. Anything you’d like to share: what worked and what could be better.", fbSend:"Send", fbSending:"Sending…", fbOk:"Got it. Thanks for taking the time.", fbErr:"Couldn’t send it. Please try again in a moment.", fbEmpty:"Write something before sending.",
+       asks:[["Next season","High season, new rooms or a new menu: I can put together a proposal to refresh your content."],["Know someone?","If another hotel or business nearby needs photo or video, feel free to pass this link along."]],
        copy:"Copy email", copied:"Copied", placeholder:"Your photo here", heroPh:"10–15 s loop", close:"Close", noVideo:"The Drive video will play here" }
 };
 
@@ -405,6 +428,9 @@ function render(){
   $("usage").replaceChildren(...(L(CONFIG.usage) || []).map(([h,p]) => el("div",{},[el("h3",{text:h}), el("p",{text:p})])));
 
   $("nTitle").textContent = t.nTitle;
+  $("fbLabel").textContent = t.fbLabel; $("fbHint").textContent = t.fbHint;
+  if (!$("fbForm").dataset.sent) $("fbBtn").textContent = t.fbSend;
+  $("fbClient").value = CONFIG.client;
   $("asks").replaceChildren(...t.asks.map(([s,d]) => el("li",{},[el("strong",{text:s}), el("span",{text:d})])));
   $("email").textContent = CONFIG.email;
   $("copyBtn").textContent = t.copy; $("copyBtn").classList.remove("copied");
@@ -421,6 +447,20 @@ $("copyBtn").addEventListener("click", () => {
   const done = () => { b.textContent = T[lang].copied; b.classList.add("copied"); };
   const fallback = () => { const r=document.createRange(); r.selectNodeContents($("email")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(CONFIG.email).then(done, fallback); } catch(e) { fallback(); }
+});
+$("fbForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, st = $("fbStatus"), b = $("fbBtn"), t = T[lang];
+  if (!$("fbText").value.trim()) { st.className = "status"; st.textContent = t.fbEmpty; $("fbText").focus(); return; }
+  b.disabled = true; b.textContent = t.fbSending; st.textContent = "";
+  try {
+    const r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() });
+    if (!r.ok) throw new Error(r.status);
+    f.dataset.sent = "1"; $("fbText").disabled = true; b.hidden = true;
+    st.className = "status ok"; st.textContent = t.fbOk;
+  } catch (err) {
+    b.disabled = false; b.textContent = t.fbSend; st.className = "status"; st.textContent = t.fbErr;
+  }
 });
 $("lbClose").addEventListener("click", closePlayer);
 $("lb").addEventListener("click", e => { if (e.target.id === "lb") closePlayer(); });

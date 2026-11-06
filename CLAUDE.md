@@ -44,3 +44,4 @@ Sitio publicado por Netlify desde la rama `main`: https://manuentregas.netlify.a
 - `scripts/build.py` — CONFIG desde config.json → index.html.
 - `scripts/drive_fetch.py` + `.github/workflows/drive-fetch.yml` — descarga de miniaturas.
 - `robots.txt` y `noindex` — las entregas no aparecen en Google.
+- Feedback: cada página tiene un formulario opcional (Netlify Forms, nombre `feedback`, campos `cliente` y `mensaje`). Las respuestas llegan al panel de Netlify (Forms) y al email de Manu si tiene la notificación activada.
