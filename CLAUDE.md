@@ -1,7 +1,7 @@
 # Entregas · Manu Galdámez — cómo hacer una entrega
 
 Manu pega en el chat un link de carpeta de Google Drive y los datos del proyecto (o la cotización). Tú haces TODO lo demás sin pedirle archivos.
-Sitio publicado por Netlify desde la rama `main`: https://manuentregas.netlify.app/<slug>  (cuando esté el dominio: https://entregas.manugaldamezphotography.com/<slug>)
+Sitio publicado por Netlify desde la rama `main`: https://entregas.manugaldamez.com/<slug>  (también responde en https://manuentregas.netlify.app/<slug>)
 
 ## 0. Repo
 - `add_repo` owner `manuelgaldamezfoto`, repo `ENTREGAS`, access `push`. Clonar en /home/claude/entregas.
