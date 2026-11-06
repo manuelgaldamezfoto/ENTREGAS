@@ -44,4 +44,5 @@ Sitio publicado por Netlify desde la rama `main`: https://entregas.manugaldamez.
 - `scripts/build.py` — CONFIG desde config.json → index.html.
 - `scripts/drive_fetch.py` + `.github/workflows/drive-fetch.yml` — descarga de miniaturas.
 - `robots.txt` y `noindex` — las entregas no aparecen en Google.
+- Legal: `privacidad/index.html` (aviso de privacidad ES/EN, LFPDPPP). La plantilla enlaza el aviso bajo el formulario y en el pie, pone © y una nota de derechos de autor/licencia en "Uso del material". Si la cotización trae condiciones de uso concretas, añádelas como un item más de `usage`.
 - Feedback: cada página tiene un formulario opcional (Netlify Forms, nombre `feedback`, campos `cliente` y `mensaje`). Las respuestas llegan al panel de Netlify (Forms) y al email de Manu si tiene la notificación activada.

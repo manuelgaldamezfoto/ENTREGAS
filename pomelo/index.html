@@ -133,6 +133,10 @@ section.block{padding-block:var(--s5)}
 .fb .status{color:var(--muted);font-size:.95rem}
 .fb .status.ok{color:var(--accent)}
 .fb .bot{position:absolute;left:-9999px}
+.fb .fine{margin:0;font-size:.85rem;color:var(--muted)}
+.fb .fine a,.foot-legal a{color:inherit;text-underline-offset:2px}
+.legal{margin:var(--s4) 0 0;max-width:70ch;font-size:.9rem;color:var(--muted)}
+.foot-legal{flex-basis:100%}
 @media (max-width:760px){.next .grid{grid-template-columns:1fr}}
 
 .contact{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-top:var(--s4)}
@@ -202,6 +206,7 @@ button.btn{font-family:var(--f-body)}
   <section class="block" id="uso"><div class="wrap">
     <div class="sec-head"><h2 id="uTitle"></h2></div>
     <div class="usage" id="usage"></div>
+    <p class="legal" id="usageLegal"></p>
   </div></section>
 
   <section class="next"><div class="wrap grid">
@@ -221,6 +226,7 @@ button.btn{font-family:var(--f-body)}
         <p class="hint" id="fbHint">Opcional. Lo que quieras contarme: lo que funcionó y lo que mejorarías.</p>
         <textarea id="fbText" name="mensaje" rows="4"></textarea>
         <div class="row"><button type="submit" class="btn" id="fbBtn">Enviar</button><span class="status" id="fbStatus" role="status"></span></div>
+        <p class="fine" id="fbPriv"></p>
       </form>
       <ul class="asks" id="asks"></ul>
     </div>
@@ -232,7 +238,7 @@ button.btn{font-family:var(--f-body)}
   <div class="lb-frame" id="lbFrame"></div>
 </div>
 
-<footer><div class="wrap mono"><span id="footL"></span><span id="footR"></span></div></footer>
+<footer><div class="wrap mono"><span id="footL"></span><span id="footR"></span><span class="foot-legal"><span id="footCopy"></span> · <a id="footPriv" href="/privacidad/"></a></span></div></footer>
 
 <script>
 /* ============================================================
@@ -396,14 +402,14 @@ const T = {
   es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
        noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
        dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en tu equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en tu equipo.`,
-       dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te gustó",
+       dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te gustó", usageLegal:"Los derechos de autor de las imágenes y vídeos son de Manu Galdámez. Con esta entrega tienes licencia para usarlos en los términos acordados en la cotización. Para otros usos (campañas pagadas, terceros, reventa), escríbeme antes.", fbPriv:"Al enviar, aceptas el <a href=\"/privacidad/\">aviso de privacidad</a>.", priv:"Aviso de privacidad",
        fbLabel:"¿Qué tal fue trabajar juntos?", fbHint:"Opcional. Lo que quieras contarme: lo que funcionó y lo que mejorarías.", fbSend:"Enviar", fbSending:"Enviando…", fbOk:"Recibido. Gracias por tomarte el tiempo.", fbErr:"No se pudo enviar. Inténtalo de nuevo en un momento.", fbEmpty:"Escribe algo antes de enviar.",
        asks:[["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
        copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el vídeo de Drive" },
   en:{ demo:"Delivery template · Hotel Pomelo example", top:"Delivery", shot:"Shoot", loc:"Location", vids:"Videos", pics:"Photos", deliv:"Delivered",
        noteLabel:"Note", vTitle:"Videos", pTitle:"Photos", sel:"selection", ofTotal:n=>`selection of ${n}`, view:"Watch", dl:"Download",
        dlText:u=>u?`The full folder is high resolution with no watermark. It will be available until ${u}, so please save it to your own drive.`:`The full folder is high resolution with no watermark. Please download it and keep a copy on your side.`,
-       dlAll:"Download everything", dlWeb:"Web & social version", uTitle:"Using the material", nTitle:"If you liked it",
+       dlAll:"Download everything", dlWeb:"Web & social version", uTitle:"Using the material", nTitle:"If you liked it", usageLegal:"Copyright in the photos and videos remains with Manu Galdámez. This delivery gives you a license to use them on the terms agreed in the quote. For other uses (paid campaigns, third parties, resale), please check with me first.", fbPriv:"By sending, you accept the <a href=\"/privacidad/#en\">privacy notice</a>.", priv:"Privacy notice",
        fbLabel:"How was it working together?", fbHint:"Optional. Anything you’d like to share: what worked and what could be better.", fbSend:"Send", fbSending:"Sending…", fbOk:"Got it. Thanks for taking the time.", fbErr:"Couldn’t send it. Please try again in a moment.", fbEmpty:"Write something before sending.",
        asks:[["Next season","High season, new rooms or a new menu: I can put together a proposal to refresh your content."],["Know someone?","If another hotel or business nearby needs photo or video, feel free to pass this link along."]],
        copy:"Copy email", copied:"Copied", placeholder:"Your photo here", heroPh:"10–15 s loop", close:"Close", noVideo:"The Drive video will play here" }
@@ -534,6 +540,10 @@ function render(){
   $("copyBtn").textContent = t.copy; $("copyBtn").classList.remove("copied");
 
   $("footL").textContent = `Manu Galdámez · ${CONFIG.instagram}`;
+  $("footCopy").textContent = `© ${new Date().getFullYear()} Manu Galdámez`;
+  $("footPriv").textContent = t.priv; $("footPriv").href = lang === "en" ? "/privacidad/#en" : "/privacidad/";
+  $("usageLegal").textContent = t.usageLegal;
+  $("fbPriv").innerHTML = t.fbPriv;
   $("footR").textContent = `${CONFIG.client} · ${L(CONFIG.deliveredDate)}`;
 }
 
