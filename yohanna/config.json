@@ -1,0 +1,61 @@
+{
+  "demo": false,
+  "lang": "en",
+  "code": "YHNA",
+  "client": "Yohanna",
+  "sub": {
+    "es": "Sesión de embarazo · Troncones, Guerrero",
+    "en": "Maternity session · Troncones, Guerrero"
+  },
+  "shootDate": {
+    "es": "Noviembre 2026",
+    "en": "November 2026"
+  },
+  "deliveredDate": {
+    "es": "Noviembre 2026",
+    "en": "November 2026"
+  },
+  "location": "Troncones, Guerrero",
+  "availableUntil": null,
+  "heroVideo": null,
+  "heroImage": "portada.jpg",
+  "note": {
+    "es": "Yohanna, gracias a los dos por confiar en mí para este momento. Fue un placer conocerlos y compartir esa tarde en la playa. Les deseo lo mejor con el bebé; que todo vaya genial.",
+    "en": "Yohanna, thank you both for trusting me with this moment. It was a real pleasure to meet you and share that evening on the beach. Wishing you all the best with the baby, I hope everything goes wonderfully."
+  },
+  "videos": [],
+  "photoTotal": 101,
+  "photos": [
+    { "src": "01.jpg", "label": { "es": "Paseo por la playa", "en": "Beach walk" } },
+    { "src": "02.jpg", "label": { "es": "Manos", "en": "Hands" } },
+    { "src": "03.jpg", "label": { "es": "Atardecer", "en": "Sunset" } },
+    { "src": "04.jpg", "label": { "es": "Yohanna", "en": "Yohanna" } },
+    { "src": "05.jpg", "label": { "es": "Un beso", "en": "A kiss" } },
+    { "src": "06.jpg", "label": { "es": "Conchas", "en": "Shells" } },
+    { "src": "07.jpg", "label": { "es": "En la arena", "en": "In the sand" } },
+    { "src": "08.jpg", "label": { "es": "Los dos", "en": "The two of you" } },
+    { "src": "09.jpg", "label": { "es": "Sobre las rocas", "en": "On the rocks" } },
+    { "src": "10.jpg", "label": { "es": "Retrato", "en": "Portrait" } },
+    { "src": "11.jpg", "label": { "es": "Frente al mar", "en": "By the sea" } },
+    { "src": "12.jpg", "label": { "es": "Flor", "en": "Flower" } }
+  ],
+  "downloads": {
+    "all": "https://drive.google.com/drive/folders/1IN-fps7Rtumjn5F5OwFmKgoeUzgXC4w8",
+    "web": null
+  },
+  "usage": {
+    "es": [
+      ["Guarda una copia", "Descarga la carpeta completa y guarda una copia en tu equipo o en tu propio Drive."],
+      ["Formatos", "Archivos JPG en alta resolución, sin marca de agua, listos para compartir e imprimir."],
+      ["Crédito", "Si las compartes en redes, una mención a @manugaldamez_ se agradece mucho."]
+    ],
+    "en": [
+      ["Keep a copy", "Download the full folder and save it to your own computer or drive."],
+      ["Formats", "High-resolution JPG files with no watermark, ready to share and print."],
+      ["Credit", "If you share them on social, a tag to @manugaldamez_ is always appreciated."]
+    ]
+  },
+  "email": "manuelgaldamezfoto@gmail.com",
+  "website": "https://www.instagram.com/manugaldamez_/",
+  "instagram": "@manugaldamez_"
+}
