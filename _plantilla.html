@@ -233,7 +233,7 @@ button.btn{font-family:var(--f-body)}
   </div></section>
 </main>
 
-<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Vídeo">
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Video">
   <button type="button" class="lb-close" id="lbClose">Cerrar ✕</button>
   <div class="lb-frame" id="lbFrame"></div>
 </div>
@@ -301,17 +301,17 @@ const CONFIG = {
 };
 
 const T = {
-  es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Vídeos", pics:"Fotos", deliv:"Entregado",
-       noteLabel:"Nota", vTitle:"Vídeos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
+  es:{ demo:"Plantilla de entrega · ejemplo con Hotel Pomelo", top:"Entrega", shot:"Sesión", loc:"Lugar", vids:"Videos", pics:"Fotos", deliv:"Entregado",
+       noteLabel:"Nota", vTitle:"Videos", pTitle:"Fotos", sel:"selección", ofTotal:n=>`selección de ${n}`, view:"Ver", dl:"Descargar",
        dlText:u=>u?`La carpeta completa está en alta resolución y sin marca de agua. Estará disponible hasta el ${u}, así que guárdala en tu equipo.`:`La carpeta completa está en alta resolución y sin marca de agua. Descárgala y guarda una copia en tu equipo.`,
-       dlAll:"Descargar todo", dlWeb:"Versión web y redes", uTitle:"Uso del material", nTitle:"Si te gustó", usageLegal:"Los derechos de autor de las imágenes y vídeos son de Manu Galdámez. Con esta entrega tienes licencia para usarlos en los términos acordados en la cotización. Para otros usos (campañas pagadas, terceros, reventa), escríbeme antes.", fbPriv:"Al enviar, aceptas el <a href=\"/privacidad/\">aviso de privacidad</a>.", priv:"Aviso de privacidad",
+       dlAll:"Descargar todo", dlWeb:"Versión web y redes", dlFolder:"Ver la carpeta en Drive", dlZipText:(n,v)=>`Un solo archivo ZIP con ${n?n+" fotos":"las fotos"}${v?` y ${v===1?"el video":"los "+v+" videos"}`:""} en alta resolución, sin marca de agua. Se descarga directo al hacer clic; guarda una copia en tu equipo.`, uTitle:"Uso del material", nTitle:"Si te gustó", usageLegal:"Los derechos de autor de las imágenes y videos son de Manu Galdámez. Con esta entrega tienes licencia para usarlos en los términos acordados en la cotización. Para otros usos (campañas pagadas, terceros, reventa), escríbeme antes.", fbPriv:"Al enviar, aceptas el <a href=\"/privacidad/\">aviso de privacidad</a>.", priv:"Aviso de privacidad",
        fbLabel:"¿Qué tal fue trabajar juntos?", fbHint:"Opcional. Lo que quieras contarme: lo que funcionó y lo que mejorarías.", fbSend:"Enviar", fbSending:"Enviando…", fbOk:"Recibido. Gracias por tomarte el tiempo.", fbErr:"No se pudo enviar. Inténtalo de nuevo en un momento.", fbEmpty:"Escribe algo antes de enviar.",
-       asks:[["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o vídeo, me encantará que le pases este enlace."]],
-       copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el vídeo de Drive" },
+       asks:[["La próxima temporada","Temporada alta, nuevas habitaciones o un menú nuevo: si quieres, te preparo una propuesta para refrescar el contenido."],["¿Conoces a alguien?","Si otro hotel o negocio de la zona necesita fotos o video, me encantará que le pases este enlace."]],
+       copy:"Copiar email", copied:"Copiado", placeholder:"Tu foto aquí", heroPh:"Loop de 10–15 s", close:"Cerrar", noVideo:"Aquí se reproducirá el video de Drive" },
   en:{ demo:"Delivery template · Hotel Pomelo example", top:"Delivery", shot:"Shoot", loc:"Location", vids:"Videos", pics:"Photos", deliv:"Delivered",
        noteLabel:"Note", vTitle:"Videos", pTitle:"Photos", sel:"selection", ofTotal:n=>`selection of ${n}`, view:"Watch", dl:"Download",
        dlText:u=>u?`The full folder is high resolution with no watermark. It will be available until ${u}, so please save it to your own drive.`:`The full folder is high resolution with no watermark. Please download it and keep a copy on your side.`,
-       dlAll:"Download everything", dlWeb:"Web & social version", uTitle:"Using the material", nTitle:"If you liked it", usageLegal:"Copyright in the photos and videos remains with Manu Galdámez. This delivery gives you a license to use them on the terms agreed in the quote. For other uses (paid campaigns, third parties, resale), please check with me first.", fbPriv:"By sending, you accept the <a href=\"/privacidad/#en\">privacy notice</a>.", priv:"Privacy notice",
+       dlAll:"Download everything", dlWeb:"Web & social version", dlFolder:"View the folder in Drive", dlZipText:(n,v)=>`One ZIP file with ${n?n+" photos":"the photos"}${v?` and ${v===1?"the video":"the "+v+" videos"}`:""} in full resolution, no watermark. It downloads straight away when you click; please keep a copy on your side.`, uTitle:"Using the material", nTitle:"If you liked it", usageLegal:"Copyright in the photos and videos remains with Manu Galdámez. This delivery gives you a license to use them on the terms agreed in the quote. For other uses (paid campaigns, third parties, resale), please check with me first.", fbPriv:"By sending, you accept the <a href=\"/privacidad/#en\">privacy notice</a>.", priv:"Privacy notice",
        fbLabel:"How was it working together?", fbHint:"Optional. Anything you’d like to share: what worked and what could be better.", fbSend:"Send", fbSending:"Sending…", fbOk:"Got it. Thanks for taking the time.", fbErr:"Couldn’t send it. Please try again in a moment.", fbEmpty:"Write something before sending.",
        asks:[["Next season","High season, new rooms or a new menu: I can put together a proposal to refresh your content."],["Know someone?","If another hotel or business nearby needs photo or video, feel free to pass this link along."]],
        copy:"Copy email", copied:"Copied", placeholder:"Your photo here", heroPh:"10–15 s loop", close:"Close", noVideo:"The Drive video will play here" }
@@ -351,6 +351,9 @@ function media(src, seed, label, isVideo, animate){
 }
 const pad = n => String(n).padStart(3,"0");
 const linkBtn = (href, text, ghost) => el("a",{class:"btn"+(ghost?" ghost":""), href, target:"_blank", rel:"noopener"},[document.createTextNode(text+" "), el("span",{class:"arr", text:"↗"})]);
+
+const dlBtn = (href, text, ghost) => el("a",{class:"btn"+(ghost?" ghost":""), href, download:""},[document.createTextNode(text+" "), el("span",{class:"arr", text:"↓"})]);
+const directUrl = url => { const id = driveId(url); return id ? `https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t` : url; };
 
 function driveId(url){
   if (!url) return null;
@@ -397,7 +400,7 @@ function render(){
   $("clientName").textContent = CONFIG.client;
   $("clientSub").textContent = L(CONFIG.sub);
 
-  const metaRows = [[t.shot, L(CONFIG.shootDate)],[t.loc, CONFIG.location], ...(CONFIG.videos.length ? [[t.vids, String(CONFIG.videos.length)]] : []), [t.pics, String(CONFIG.photoTotal || CONFIG.photos.length)],[t.deliv, L(CONFIG.deliveredDate)]];
+  const metaRows = [[t.shot, L(CONFIG.shootDate)],...(CONFIG.location ? [[t.loc, CONFIG.location]] : []), ...(CONFIG.videos.length ? [[t.vids, String(CONFIG.videos.length)]] : []), [t.pics, String(CONFIG.photoTotal || CONFIG.photos.length)],[t.deliv, L(CONFIG.deliveredDate)]];
   $("meta").style.gridTemplateColumns = innerWidth > 760 ? `repeat(${metaRows.length},minmax(0,1fr))` : "";
   $("videos").hidden = !CONFIG.videos.length;
   $("uso").hidden = !CONFIG.usage;
@@ -414,7 +417,7 @@ function render(){
       el("div",{class:"film "+(vertical?"v916":"v169")},[el("div",{class:"pic"},[media(v.poster, i+2, v.format, false, false)])]),
       el("h3",{text:L(v.title)}),
       el("div",{class:"info mono"},[el("span",{text:v.format}), ...(v.length ? [el("span",{text:v.length})] : []), el("span",{text:`${CONFIG.code} ${pad(i+1)}V`})]),
-      el("div",{class:"btns"},[playBtn(v, t.view), ...(v.drive ? [linkBtn(v.drive, t.dl, true)] : [])])
+      el("div",{class:"btns"},[playBtn(v, t.view), ...(v.download || v.drive ? [dlBtn(v.download || directUrl(v.drive), t.dl, true)] : [])])
     ]);
   }));
 
@@ -424,8 +427,12 @@ function render(){
     el("div",{class:"film"+(p.tall?" tall":"")},[el("div",{class:"pic"},[media(p.src, i, p.src ? L(p.label) : t.placeholder, false, false)])]),
     el("figcaption",{class:"mono", text:`${CONFIG.code} ${pad(i+1)} · ${L(p.label)}`})
   ])));
-  $("dlText").textContent = t.dlText(L(CONFIG.availableUntil));
-  $("dlBtns").replaceChildren(linkBtn(CONFIG.downloads.all, t.dlAll, false), ...(CONFIG.downloads.web ? [linkBtn(CONFIG.downloads.web, t.dlWeb, true)] : []));
+  const D = CONFIG.downloads, zip = D.zip;
+  $("dlText").textContent = zip ? t.dlZipText(CONFIG.photoTotal, CONFIG.videos.length) : t.dlText(L(CONFIG.availableUntil));
+  $("dlBtns").replaceChildren(
+    zip ? dlBtn(zip, t.dlAll + (D.zipSize ? ` · ${D.zipSize}` : ""), false) : linkBtn(D.all, t.dlAll, false),
+    ...(zip && D.all ? [linkBtn(D.all, t.dlFolder, true)] : []),
+    ...(D.web ? [linkBtn(D.web, t.dlWeb, true)] : []));
   const real = CONFIG.photos.every(p => p.src);
   $("photoGrid").classList.toggle("real", real);
   $("photoGrid").classList.toggle("three", !real && CONFIG.photos.length % 3 === 0 && CONFIG.photos.length % 4 !== 0);
@@ -437,7 +444,7 @@ function render(){
   $("fbLabel").textContent = t.fbLabel; $("fbHint").textContent = t.fbHint;
   if (!$("fbForm").dataset.sent) $("fbBtn").textContent = t.fbSend;
   $("fbClient").value = CONFIG.client;
-  $("asks").replaceChildren(...t.asks.map(([s,d]) => el("li",{},[el("strong",{text:s}), el("span",{text:d})])));
+  $("asks").replaceChildren(...(L(CONFIG.asks) || t.asks).map(([s,d]) => el("li",{},[el("strong",{text:s}), el("span",{text:d})])));
   $("email").textContent = CONFIG.email;
   $("copyBtn").textContent = t.copy; $("copyBtn").classList.remove("copied");
 

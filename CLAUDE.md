@@ -18,6 +18,14 @@ Sitio publicado por Netlify desde la rama `main`: https://entregas.manugaldamez.
 - Espera en segundo plano con `git ls-remote origin drive-cache` + `git fetch --depth 1 origin drive-cache` hasta que exista `<slug>/_report.json`. Ábrela con `git worktree add /home/claude/cache FETCH_HEAD`.
 - Si hay que repetir (Manu cambió la carpeta), borra `<slug>/` en `drive-cache` y vuelve a hacer push del job.
 
+## 2b. Descarga directa (ZIP) — por defecto en todas las entregas
+- Crea `_zips/<slug>.json` → `{"slug": "<slug>", "folder": "<ID carpeta>", "name": "<NOMBRE>"}` y haz push (puede ir en el mismo push que el job).
+- La Action "Crear ZIP de descarga directa" baja los originales de Drive, los empaqueta sin comprimir y los sube como `<NOMBRE>.zip` a la release `entrega-<slug>`. Tarda ~5–10 min. Límite: 2 GB por ZIP.
+- Comprueba con `curl -s https://api.github.com/repos/manuelgaldamezfoto/entregas/releases` que el archivo existe y su tamaño.
+- En `config.json`: `downloads.zip` = `https://github.com/manuelgaldamezfoto/entregas/releases/download/entrega-<slug>/<NOMBRE>.zip`, `downloads.zipSize` = p. ej. `"ZIP 1.4 GB"`, y `downloads.all` = link de la carpeta (sale como botón secundario "Ver la carpeta en Drive").
+- Los botones "Descargar" de cada video bajan el archivo directo (drive.usercontent) sin pasar por Drive.
+- Si Manu cambia la carpeta, vuelve a hacer push de `_zips/<slug>.json` (con cualquier cambio) y se reemplaza el ZIP.
+
 ## 3. Elegir
 - Haz hojas de contactos con `montage` (40 por hoja, 8 columnas) y míralas TODAS. Mapea posición → nombre con la lista ordenada.
 - Portada: horizontal, la más reconocible del lugar (aérea o plano general). Si hay un vídeo-loop corto en la carpeta, puede ir de portada.
@@ -29,6 +37,7 @@ Sitio publicado por Netlify desde la rama `main`: https://entregas.manugaldamez.
   - Sin precios. Sin datos inventados: si no sabes una fecha o un dato, pregúntalo o déjalo fuera.
   - `photoTotal` = número de imágenes del manifest. `downloads.all` = link de la carpeta. `downloads.web` = link de una subcarpeta "web" si existe, si no `null`.
   - Vídeos del manifest → `videos: [{title, format: "16:9"|"9:16", length (opcional), drive: "https://drive.google.com/file/d/<ID>/view"}]`. El formato se deduce del nombre o se pregunta. Se reproducen dentro de la página.
+  - Opcional: `poster` en cada video (una foto de la sesión como portada de la tarjeta), `asks` {es,en} para cambiar los dos bloques de "Si te gustó" cuando el cliente no es un hotel, y `location: null` si no sabes el lugar.
   - `website`: Instagram (la web de Manu está caída).
   - Español de México para clientes mexicanos (tú / ustedes, nunca vosotros). Inglés si el cliente es angloparlante (`lang: "en"`).
   - Nota al cliente: 2–3 frases, concreta, sin clichés ni emojis.

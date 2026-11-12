@@ -1,0 +1,208 @@
+{
+  "demo": false,
+  "lang": "es",
+  "code": "MUSA",
+  "client": "Musa",
+  "sub": {
+    "es": "Video, reel y fotografía · Andrés Saavedra",
+    "en": "Video, reel and photography · Andrés Saavedra"
+  },
+  "shootDate": {
+    "es": "Octubre 2026",
+    "en": "October 2026"
+  },
+  "deliveredDate": {
+    "es": "Noviembre 2026",
+    "en": "November 2026"
+  },
+  "location": null,
+  "availableUntil": null,
+  "heroVideo": null,
+  "heroImage": "portada.jpg",
+  "note": {
+    "es": "Andrés, gracias por la confianza y por abrirnos Musa de punta a punta: los espacios, el jeep, las tablas y la gente. Queríamos contarlo como se vive, sin forzar nada. Aquí están los videos, el reel y una selección de fotos; abajo, todo en alta para descargar.",
+    "en": "Andrés, thank you for the trust and for opening up Musa end to end: the spaces, the jeep, the boards and the people. We wanted to show it the way it’s lived, without forcing anything. Here are the videos, the reel and a photo selection; below, everything in full resolution to download."
+  },
+  "videos": [
+    {
+      "title": {
+        "es": "Video lifestyle · horizontal",
+        "en": "Lifestyle video · horizontal"
+      },
+      "format": "16:9",
+      "poster": "poster-h.jpg",
+      "drive": "https://drive.google.com/file/d/1Wz1GKwu9Em4fzrAgkm_yjbNytSxh__FS/view"
+    },
+    {
+      "title": {
+        "es": "Video lifestyle · vertical",
+        "en": "Lifestyle video · vertical"
+      },
+      "format": "9:16",
+      "poster": "poster-v.jpg",
+      "drive": "https://drive.google.com/file/d/1kfYv_y6-qfe4NRB-5A9WoisuVyzgqMPj/view"
+    },
+    {
+      "title": {
+        "es": "Reel para Instagram",
+        "en": "Instagram reel"
+      },
+      "format": "9:16",
+      "poster": "poster-reel.jpg",
+      "drive": "https://drive.google.com/file/d/1prIhzv7OIR3u8bqMsX_KtDzvf6416xAD/view"
+    }
+  ],
+  "photoTotal": 73,
+  "photos": [
+    {
+      "src": "01.jpg",
+      "label": {
+        "es": "Surf desde el aire",
+        "en": "Surf from above"
+      }
+    },
+    {
+      "src": "02.jpg",
+      "label": {
+        "es": "Antes del agua",
+        "en": "Before the water"
+      },
+      "tall": true
+    },
+    {
+      "src": "03.jpg",
+      "label": {
+        "es": "El jeep",
+        "en": "The jeep"
+      }
+    },
+    {
+      "src": "04.jpg",
+      "label": {
+        "es": "La mesa",
+        "en": "The table"
+      }
+    },
+    {
+      "src": "05.jpg",
+      "label": {
+        "es": "Entre muros",
+        "en": "Between walls"
+      },
+      "tall": true
+    },
+    {
+      "src": "06.jpg",
+      "label": {
+        "es": "Alberca",
+        "en": "Pool"
+      }
+    },
+    {
+      "src": "07.jpg",
+      "label": {
+        "es": "Pasillo",
+        "en": "Passage"
+      },
+      "tall": true
+    },
+    {
+      "src": "08.jpg",
+      "label": {
+        "es": "Atardecer",
+        "en": "Sunset"
+      }
+    },
+    {
+      "src": "09.jpg",
+      "label": {
+        "es": "Tacos",
+        "en": "Tacos"
+      }
+    },
+    {
+      "src": "10.jpg",
+      "label": {
+        "es": "Camastro",
+        "en": "Daybed"
+      },
+      "tall": true
+    },
+    {
+      "src": "11.jpg",
+      "label": {
+        "es": "A la playa",
+        "en": "To the beach"
+      }
+    },
+    {
+      "src": "12.jpg",
+      "label": {
+        "es": "Tablas",
+        "en": "Boards"
+      },
+      "tall": true
+    }
+  ],
+  "downloads": {
+    "zip": "https://github.com/manuelgaldamezfoto/entregas/releases/download/entrega-musa/MUSA.zip",
+    "zipSize": "ZIP 1.4 GB",
+    "all": "https://drive.google.com/drive/folders/1Flc1TBcSH8XIZWV1kaI1pm-iwj8DfX_K",
+    "web": null
+  },
+  "usage": {
+    "es": [
+      [
+        "Guarda una copia",
+        "Descarga el ZIP y guarda una copia en tu equipo o en tu propio Drive."
+      ],
+      [
+        "Formatos",
+        "Fotos en JPG de alta resolución y videos en MOV, sin marca de agua. El horizontal es para web y YouTube; el vertical y el reel, para Instagram y TikTok."
+      ],
+      [
+        "Crédito",
+        "En redes, una mención a @manugaldamez_ se agradece mucho."
+      ]
+    ],
+    "en": [
+      [
+        "Keep a copy",
+        "Download the ZIP and save a copy to your computer or your own drive."
+      ],
+      [
+        "Formats",
+        "High-resolution JPG photos and MOV videos, no watermark. The horizontal cut is for web and YouTube; the vertical cut and the reel, for Instagram and TikTok."
+      ],
+      [
+        "Credit",
+        "On social, a tag to @manugaldamez_ is always appreciated."
+      ]
+    ]
+  },
+  "asks": {
+    "es": [
+      [
+        "Lo que sigue",
+        "Nuevas etapas del proyecto, temporada alta o un lanzamiento: si quieres, te preparo una propuesta para seguir generando contenido de Musa."
+      ],
+      [
+        "¿Conoces a alguien?",
+        "Si alguien de tu círculo necesita foto o video, me encantará que le pases este enlace."
+      ]
+    ],
+    "en": [
+      [
+        "What’s next",
+        "New phases of the project, high season or a launch: I can put together a proposal to keep creating content for Musa."
+      ],
+      [
+        "Know someone?",
+        "If someone you know needs photo or video, feel free to pass this link along."
+      ]
+    ]
+  },
+  "email": "manuelgaldamezfoto@gmail.com",
+  "website": "https://www.instagram.com/manugaldamez_/",
+  "instagram": "@manugaldamez_"
+}
