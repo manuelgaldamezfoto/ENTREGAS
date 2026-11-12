@@ -1,0 +1,32 @@
+name: Crear ZIP de descarga directa
+on:
+  push:
+    branches: [main]
+    paths: ["_zips/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: drive-zip
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Empaquetar y publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          changed=$(git diff --name-only HEAD~1 HEAD -- '_zips/*.json' || true)
+          [ -z "$changed" ] && changed=$(ls _zips/*.json)
+          for jf in $changed; do
+            [ -f "$jf" ] || continue
+            rm -rf out && python3 scripts/drive_zip.py "$jf" out
+            . out/release.env
+            tag="entrega-$SLUG"
+            gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "Entrega $SLUG" --notes "Archivo de descarga directa para la entrega $SLUG."
+            gh release upload "$tag" "$ZIP" --clobber
+            echo "$tag $(basename $ZIP) $SIZE bytes, $COUNT archivos"
+          done
